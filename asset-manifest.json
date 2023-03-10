@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/rbi-test/static/css/main.52e4f241.css",
-    "main.js": "/rbi-test/static/js/main.3c424c84.js",
+    "main.js": "/rbi-test/static/js/main.2403047b.js",
     "index.html": "/rbi-test/index.html",
     "main.52e4f241.css.map": "/rbi-test/static/css/main.52e4f241.css.map",
-    "main.3c424c84.js.map": "/rbi-test/static/js/main.3c424c84.js.map"
+    "main.2403047b.js.map": "/rbi-test/static/js/main.2403047b.js.map"
   },
   "entrypoints": [
     "static/css/main.52e4f241.css",
-    "static/js/main.3c424c84.js"
+    "static/js/main.2403047b.js"
   ]
 }
