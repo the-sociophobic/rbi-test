@@ -87,16 +87,21 @@ const moveNode = (
   newIndex: number
 ) => {
   if ([-1, -2].includes(parseInt(movedNodeId + '')))
-    throw new Error(`Node with ${movedNodeId} isn't supported`)
+    throw new Error(`Node with id ${movedNodeId} isn't supported`)
 
-  var rootCopy = deepCopy(root)
-  var movedNode: undefined | Item
+  let rootCopy = deepCopy(root)
+  let movedNode: undefined | Item
+  let nodeRemovalAffectsNewIndexFlag = false
 
   // removing node from its old place
   breadthTraverse(rootCopy, (node, index, parentNode, finish) => {
     if (node.id === movedNodeId && parentNode) {
       movedNode = node
       parentNode.items?.splice(index, 1)
+
+      // if (parentNode.id === newParentNodeId && index < newIndex)
+      //   nodeRemovalAffectsNewIndexFlag = true
+
       finish()
     }
   })
@@ -105,9 +110,12 @@ const moveNode = (
     throw new Error(`Node with id ${movedNodeId} wasn't found`)
 
   // adding node to its new place
-  setNodeById(rootCopy, newParentNodeId, node =>
-    movedNode && node.items?.splice(newIndex, 0, movedNode)
-  )
+  setNodeById(rootCopy, newParentNodeId, node => {
+    if (movedNode) {
+      node.items?.splice(nodeRemovalAffectsNewIndexFlag ? newIndex - 1 : newIndex, 0, movedNode)
+      node.collapsible = true
+    }
+  })
 
   return rootCopy
 }

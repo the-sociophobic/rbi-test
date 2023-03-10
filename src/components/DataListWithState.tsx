@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-// import TableSelection from '@jetbrains/ring-ui/dist/table/selection'
+import TableSelection from '@jetbrains/ring-ui/dist/table/selection'
 
 import DataList from '@jetbrains/ring-ui/dist/data-list/data-list'
 import Selection from '@jetbrains/ring-ui/dist/data-list/selection'
@@ -36,37 +36,37 @@ class DataListDnd extends PureComponent<DataListDndProps> {
     })
   }
 
-  // moreExpandableItems = new Set([this.props.initialList[0].id])
-  // moreExpandedItems = new Set()
+  moreExpandableItems = new Set([this.props.initialList[0].id])
+  moreExpandedItems = new Set()
 
-  // itemMoreLessState = (item: FormattedItem<Item>) => {
-  //   if (item.id != null && this.moreExpandableItems.has(item.id)) {
-  //     return this.moreExpandedItems.has(item.id)
-  //       ? moreLessButtonStates.LESS
-  //       : moreLessButtonStates.MORE
-  //   } else {
-  //     return moreLessButtonStates.UNUSED
-  //   }
-  // }
+  itemMoreLessState = (item: FormattedItem<Item>) => {
+    if (item.id != null && this.moreExpandableItems.has(item.id)) {
+      return this.moreExpandedItems.has(item.id)
+        ? moreLessButtonStates.LESS
+        : moreLessButtonStates.MORE
+    } else {
+      return moreLessButtonStates.UNUSED
+    }
+  }
 
-  // onItemMoreLess = (item: Item, more: boolean) => {
-  //   if (more) {
-  //     this.moreExpandedItems.add(item.id)
-  //     item.items = item.items ?? []
-  //     item.items = item.items.concat([...moreItems])
-  //   } else {
-  //     this.moreExpandedItems.delete(item.id)
-  //     item.items = item.items ?? []
-  //     item.items = item.items.slice(0, item.items.length - moreItems.length)
-  //   }
+  onItemMoreLess = (item: Item, more: boolean) => {
+    if (more) {
+      this.moreExpandedItems.add(item.id)
+      item.items = item.items ?? []
+      item.items = item.items.concat([...moreItems])
+    } else {
+      this.moreExpandedItems.delete(item.id)
+      item.items = item.items ?? []
+      item.items = item.items.slice(0, item.items.length - moreItems.length)
+    }
 
-  //   const data = this.state.data
-  //   this.setState({ data: [...data] })
-  // }
+    const data = this.state.data
+    this.setState({ data: [...data] })
+  }
 
-  // onSelect = (selection: TableSelection<Item>) => {
-  //   this.setState({ selection })
-  // }
+  onSelect = (selection: TableSelection<Item>) => {
+    this.setState({ selection })
+  }
 
   itemFormatter = (item: Item): FormattedItem<Item> => {
     const items = this.getChildren(item)
@@ -100,10 +100,10 @@ class DataListDnd extends PureComponent<DataListDndProps> {
       <DataList
         data={this.state.data}
         selection={this.state.selection}
-        // onSelect={this.onSelect}
+        onSelect={this.onSelect}
         itemFormatter={this.itemFormatter}
-        // onItemMoreLess={this.onItemMoreLess}
-        // itemMoreLessState={this.itemMoreLessState}
+        onItemMoreLess={this.onItemMoreLess}
+        itemMoreLessState={this.itemMoreLessState}
       />
     )
   }

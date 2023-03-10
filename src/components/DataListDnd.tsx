@@ -26,14 +26,14 @@ const DataListDnd: React.FC<DataListDndProps> = ({
         node={{ ...node }}
         onDropTop={parentNode?.id === -1 && index === 0 ?
           (movedNodeId: number | string) => {
-            setList(moveNode(root, movedNodeId, parentNode.id, index - 1).items)
+            setList(moveNode(root, movedNodeId, parentNode.id, index).items)
             setUpdate(!update)
           }
           :
           undefined
         }
         onDropBottom={(movedNodeId: number | string) => {
-          setList(moveNode(root, movedNodeId, parentNode?.id || 0, index).items)
+          setList(moveNode(root, movedNodeId, parentNode?.id || 0, index + 1).items)
           setUpdate(!update)
         }
         }
