@@ -99,8 +99,8 @@ const moveNode = (
       movedNode = node
       parentNode.items?.splice(index, 1)
 
-      // if (parentNode.id === newParentNodeId && index < newIndex)
-      //   nodeRemovalAffectsNewIndexFlag = true
+      if (parentNode.id === newParentNodeId && index < newIndex)
+        nodeRemovalAffectsNewIndexFlag = true
 
       finish()
     }
@@ -112,7 +112,9 @@ const moveNode = (
   // adding node to its new place
   setNodeById(rootCopy, newParentNodeId, node => {
     if (movedNode) {
-      node.items?.splice(nodeRemovalAffectsNewIndexFlag ? newIndex - 1 : newIndex, 0, movedNode)
+      if (!node.items)
+        node.items = []
+      node.items.splice(nodeRemovalAffectsNewIndexFlag ? newIndex - 1 : newIndex, 0, movedNode)
       node.collapsible = true
     }
   })
